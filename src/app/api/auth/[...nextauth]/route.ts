@@ -9,7 +9,7 @@ const authOptions = {
     }),
   ],
   pages: {
-    signIn: "/auth/signin", // Optional: Ensure this page exists
+    signIn: "/auth/signin",
   },
 };
 

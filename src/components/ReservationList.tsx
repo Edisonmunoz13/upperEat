@@ -16,11 +16,11 @@ const ReservationList = () => {
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
   const [status, setStatus] = useState("");
-  const [filterStatus, setFilterStatus] = useState(""); // Estado del filtro
+  const [filterStatus, setFilterStatus] = useState("");
   const [error, setError] = useState<string | null>(null);
 
-  const [currentPage, setCurrentPage] = useState(1); // Página actual
-  const itemsPerPage = 6; // Número de elementos por página
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 6;
 
   const fetchReservations = async () => {
     try {
@@ -28,7 +28,7 @@ const ReservationList = () => {
       if (!response.ok) throw new Error("Error al obtener reservas");
       const data = await response.json();
       setReservations(data);
-      setFilteredReservations(data); // Inicializamos con todas las reservas
+      setFilteredReservations(data);
     } catch {
       setError(error || "Error al cargar las reservas");
     }
@@ -40,7 +40,7 @@ const ReservationList = () => {
 
   useEffect(() => {
     if (filterStatus === "") {
-      setFilteredReservations(reservations); // Si no hay filtro, mostramos todas
+      setFilteredReservations(reservations);
     } else {
       setFilteredReservations(
         reservations.filter(

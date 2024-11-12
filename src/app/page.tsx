@@ -14,7 +14,7 @@ export default function Home() {
   const [isCreateMode, setIsCreateMode] = useState(false);
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center h-[900px] p-4 pb-20 gap-16 font-[family-name:var(--font-geist-sans)]">
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center h-[800px] p-4 pb-20 gap-16 font-[family-name:var(--font-geist-sans)]">
       <Header />
       {!isListMode && !isCreateMode && (
         <ModeSelector
@@ -31,7 +31,7 @@ export default function Home() {
       <div className="flex items-center justify-center w-full ">
         <div className="absolute inset-0 z-0">
           <Image
-            className="object-cover w-full opacity-30"
+            className=" object-cover w-full opacity-30"
             src="/upperBackground.jpg"
             fill
             style={{ objectFit: "cover" }}
