@@ -32,7 +32,7 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <Image
             className=" object-cover w-full opacity-30"
-            src="/upperBackground.jpg"
+            src="/upperBackground2.jpg"
             fill
             style={{ objectFit: "cover" }}
             alt="Background Image"
