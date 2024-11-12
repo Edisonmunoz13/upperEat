@@ -14,7 +14,7 @@ export default function Home() {
   const [isCreateMode, setIsCreateMode] = useState(false);
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center h-[800px] p-4 pb-20 gap-16 font-[family-name:var(--font-geist-sans)]">
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center h-full p-4 pb-20 gap-16 font-[family-name:var(--font-geist-sans)]">
       <Header />
       {!isListMode && !isCreateMode && (
         <ModeSelector
@@ -38,6 +38,7 @@ export default function Home() {
             alt="Background Image"
             loading="lazy"
           />
+
           <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
         </div>
 
@@ -56,7 +57,7 @@ export default function Home() {
             {isListVisible && (
               <div className="mt-[300px] w-full max-w-[1200px] mx-4">
                 <ReservationList />
-                <div className="w-full flex items-center justify-center mb-8">
+                <div className="w-full flex items-center justify-center mb-20">
                   <button
                     onClick={() => {
                       setIsCreateModalVisible(true);
