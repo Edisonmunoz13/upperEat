@@ -9,7 +9,7 @@ const Footer = () => {
       </div>
 
       <div className="">
-        <div className="my-3 flex flex-row items-center justify-around">
+        <div className="my-3 flex flex-row items-center justify-around space-x-2">
           <a href="https://www.instagram.com/upper_eat/" target="_blank" rel="noopener noreferrer">
             <Image src={"/social-1.png"} width={30} height={30} alt="instagram" />
           </a>
