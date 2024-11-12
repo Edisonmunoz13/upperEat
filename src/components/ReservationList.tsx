@@ -36,7 +36,7 @@ const ReservationList = () => {
 
   useEffect(() => {
     fetchReservations();
-  });
+  }, []);
 
   useEffect(() => {
     if (filterStatus === "") {
