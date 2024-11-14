@@ -8,7 +8,7 @@ interface SelectorProps {
 
 const ModeSelector = ({ create, list }: SelectorProps) => {
   return (
-    <div className="mt-[650px] z-30 flex flex-col space-y-6">
+    <div className=" z-30 flex flex-col space-y-6">
       <Image
         className="mb-8 ml-2"
         src={"/upperEatLogo.png"}
@@ -36,7 +36,7 @@ const ModeSelector = ({ create, list }: SelectorProps) => {
       </h2>
 
       <button
-        onClick={() => signIn("google")}
+        onClick={() => signIn("google", { callbackUrl: "/reservations" })}
         className="flex flex-row items-center justify-center bg-softBlack text-lg font-semibold text-white w-[320px] py-3 rounded-lg"
       >
         <>

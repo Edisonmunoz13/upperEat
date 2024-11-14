@@ -1,42 +1,42 @@
 [
   {
-    "id": "1",
     "name": "John Doe",
     "people": 4,
     "date": "2024-11-15T18:30:00Z",
     "time": "18:30",
-    "status": "Pending"
+    "status": "Pending",
+    "createdAt": "2024-10-30T10:00:00Z"
   },
   {
-    "id": "2",
     "name": "Jane Smith",
     "people": 2,
     "date": "2024-11-16T19:00:00Z",
     "time": "19:00",
-    "status": "Confirmed"
+    "status": "Confirmed",
+    "createdAt": "2024-10-31T11:30:00Z"
   },
   {
-    "id": "3",
     "name": "Alice Johnson",
     "people": 3,
     "date": "2024-11-17T20:00:00Z",
     "time": "20:00",
-    "status": "Cancelled"
+    "status": "Cancelled",
+    "createdAt": "2024-11-01T14:15:00Z"
   },
   {
-    "id": "4",
     "name": "Bob Brown",
     "people": 5,
     "date": "2024-11-18T21:30:00Z",
     "time": "21:30",
-    "status": "Pending"
+    "status": "Pending",
+    "createdAt": "2024-11-02T16:45:00Z"
   },
   {
-    "id": "5",
     "name": "Charlie Davis",
     "people": 6,
     "date": "2024-11-19T22:00:00Z",
     "time": "22:00",
-    "status": "Confirmed"
+    "status": "Confirmed",
+    "createdAt": "2024-11-03T18:20:00Z"
   }
 ]

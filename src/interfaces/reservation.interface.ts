@@ -2,7 +2,8 @@ export interface Reservation {
   id: string;
   name: string;
   people: number;
-  date: string;
+  date: Date;
   time: string;
   status: "Pending" | "Confirmed" | "Cancelled";
+  createdAt: Date;
 }
