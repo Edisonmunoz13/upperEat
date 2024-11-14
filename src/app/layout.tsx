@@ -4,7 +4,6 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import Header from "../components/Header";
-import Footer from "../components/Footer";
 import Image from "next/image";
 
 const geistSans = localFont({
@@ -54,7 +53,6 @@ export default function RootLayout({
           </div>
 
           {children}
-          <Footer />
         </SessionProvider>
       </body>
     </html>
