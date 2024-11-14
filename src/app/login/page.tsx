@@ -3,7 +3,7 @@ import React from "react";
 import ModeSelector from "../../components/ModeSelector";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   return (
     <div className="mt-[140px] flex items-center justify-center ">
@@ -19,4 +19,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

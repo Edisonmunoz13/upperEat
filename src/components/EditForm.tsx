@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Reservation } from "../interfaces/reservation.interface";
 import { updateReservation } from "../services/reservationServices";
+import { useRouter } from "next/navigation";
 
 interface EditFormProps {
   cancel: () => void;
@@ -17,6 +18,7 @@ const EditForm = ({ cancel, reservation }: EditFormProps) => {
     "Pending",
   );
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     if (reservation) {
@@ -29,8 +31,8 @@ const EditForm = ({ cancel, reservation }: EditFormProps) => {
   }, [reservation]);
 
   const handleDateChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newDate = e.target.value;
-    setDate(newDate ? new Date(newDate) : null);
+    const newDateValue = e.target.value;
+    setDate(newDateValue ? new Date(newDateValue) : null);
   };
 
   const handleUpdate = async (e: React.FormEvent) => {
@@ -41,20 +43,22 @@ const EditForm = ({ cancel, reservation }: EditFormProps) => {
         id: reservation.id,
         name,
         people: parseInt(people, 10),
-        date,
+        date: date ?? undefined,
         time,
         status,
+        createdAt: reservation.createdAt,
       };
 
       try {
-        await updateReservation(body); // Use the service here
+        await updateReservation(body);
+        router.push("/reservations");
         setError(null);
-      } catch (error) {
+      } catch {
         setError("Error al actualizar la reserva");
+        console.log(error);
       }
     }
   };
-
   return (
     <div className="flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg text-center space-y-2">

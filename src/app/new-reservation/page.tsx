@@ -3,7 +3,7 @@ import ReservationForm from "@/components/ReservationForm";
 import React from "react";
 import { useRouter } from "next/navigation";
 
-const page = () => {
+const Page = () => {
   const router = useRouter();
   return (
     <div className="flex items-center justify-center ">
@@ -16,4 +16,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;

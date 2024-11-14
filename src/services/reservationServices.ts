@@ -1,3 +1,5 @@
+import { Reservation } from "../interfaces/reservation.interface";
+
 export const fetchReservations = async () => {
   try {
     const response = await fetch("/api/reservations/read");
@@ -37,7 +39,7 @@ export const createReservation = async (reservation: {
   }
 };
 
-export const updateReservation = async (body: any): Promise<void> => {
+export const updateReservation = async (body: Partial<Reservation>) => {
   const response = await fetch("/api/reservations/edit", {
     method: "PUT",
     headers: {
@@ -47,7 +49,7 @@ export const updateReservation = async (body: any): Promise<void> => {
   });
 
   if (!response.ok) {
-    throw new Error("Error al actualizar la reserva");
+    throw new Error("Error updating reservation");
   }
 };
 

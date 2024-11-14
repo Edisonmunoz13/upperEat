@@ -12,7 +12,7 @@ export default function Home() {
 
   return (
     <div>
-      <h2>Horacio says "Hello"</h2>
+      <h2>Horacio says Hello</h2>
     </div>
   );
 }

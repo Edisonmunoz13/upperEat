@@ -25,7 +25,7 @@ const ReservationList = () => {
       const data = await fetchReservations();
       setReservations(data);
       setFilteredReservations(data);
-    } catch (error) {
+    } catch {
       setError("Error al cargar las reservas");
     }
   };
