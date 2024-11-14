@@ -54,7 +54,6 @@ export default function RootLayout({
           </div>
 
           {children}
-          <Footer />
         </SessionProvider>
       </body>
     </html>
