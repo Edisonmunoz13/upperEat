@@ -2,40 +2,36 @@
 import { useEffect, useState } from "react";
 import { Reservation } from "../interfaces/reservation.interface";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import {
+  fetchReservations,
+  deleteReservation,
+} from "../services/reservationServices";
 
 const ReservationList = () => {
+  const router = useRouter();
   const [reservations, setReservations] = useState<Reservation[]>([]);
   const [filteredReservations, setFilteredReservations] = useState<
     Reservation[]
   >([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [currentReservation, setCurrentReservation] =
-    useState<Reservation | null>(null);
-  const [name, setName] = useState("");
-  const [people, setPeople] = useState("");
-  const [date, setDate] = useState("");
-  const [time, setTime] = useState("");
-  const [status, setStatus] = useState("");
   const [filterStatus, setFilterStatus] = useState("");
   const [error, setError] = useState<string | null>(null);
 
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 6;
 
-  const fetchReservations = async () => {
+  const loadReservations = async () => {
     try {
-      const response = await fetch("/api/reservations/read");
-      if (!response.ok) throw new Error("Error al obtener reservas");
-      const data = await response.json();
+      const data = await fetchReservations();
       setReservations(data);
       setFilteredReservations(data);
-    } catch {
-      setError(error || "Error al cargar las reservas");
+    } catch (error) {
+      setError("Error al cargar las reservas");
     }
   };
 
   useEffect(() => {
-    fetchReservations();
+    loadReservations();
   }, []);
 
   useEffect(() => {
@@ -52,70 +48,19 @@ const ReservationList = () => {
 
   const handleDelete = async (id: string) => {
     try {
-      const response = await fetch(`/api/reservations/delete?id=${id}`, {
-        method: "DELETE",
-      });
-
-      if (!response.ok) throw new Error("Error al eliminar la reserva");
+      await deleteReservation(id);
       setReservations(
         reservations.filter((reservation) => reservation.id !== id),
       );
     } catch {
-      setError(error || "Error al eliminar la reserva");
+      setError("Error al eliminar la reserva");
     }
   };
 
   const handleEdit = (reservation: Reservation) => {
-    setCurrentReservation(reservation);
-    setName(reservation.name);
-    setPeople(reservation.people.toString());
-    setDate(reservation.date.split("T")[0]);
-    setTime(reservation.time);
-    setModalOpen(true);
-    setStatus(reservation.status);
+    router.push(`/edit-reservation/${reservation.id}`);
   };
 
-  const handleUpdate = async (e: React.FormEvent) => {
-    if (currentReservation) {
-      e.preventDefault();
-      const body = {
-        id: currentReservation.id,
-        name,
-        people: parseInt(people),
-        date,
-        time,
-        status,
-      };
-
-      try {
-        const response = await fetch("/api/reservations/edit", {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(body),
-        });
-
-        if (!response.ok) throw new Error("Error al actualizar la reserva");
-
-        const updatedReservation = await response.json();
-        setReservations(
-          reservations.map((reservation) =>
-            reservation.id === updatedReservation.id
-              ? updatedReservation
-              : reservation,
-          ),
-        );
-
-        setModalOpen(false);
-        setError(null);
-      } catch {
-        setError(error || "Error al actualizar la reserva");
-      }
-    }
-  };
-
-  // Calcular las reservas a mostrar para la página actual
   const currentReservations = filteredReservations.slice(
     (currentPage - 1) * itemsPerPage,
     currentPage * itemsPerPage,
@@ -128,7 +73,7 @@ const ReservationList = () => {
   };
 
   return (
-    <div className="p-4 bg-white z-30 relative rounded-lg mt-[500px]">
+    <div className="p-4 bg-white z-30 relative rounded-lg">
       <h2 className="text-center font-semibold text-xl mb-2">
         Lista de Reservas
       </h2>
@@ -143,9 +88,9 @@ const ReservationList = () => {
           className="border p-1 rounded"
         >
           <option value="">Todos</option>
-          <option value="Pending">Pending</option>
-          <option value="Confirmed">Confirmed</option>
-          <option value="Cancelled">Cancelled</option>
+          <option value="Pending">Pendiente</option>
+          <option value="Confirmed">Confirmada</option>
+          <option value="Cancelled">Cancelada</option>
         </select>
       </div>
 
@@ -166,9 +111,7 @@ const ReservationList = () => {
             </div>
             <div className="space-y-1 flex flex-col">
               <button
-                onClick={() => {
-                  handleEdit(reservation);
-                }}
+                onClick={() => handleEdit(reservation)}
                 className="bg-blue-500 text-white p-1 rounded-full"
               >
                 <Image src="/edit.png" width={14} height={14} alt="edit" />
@@ -203,85 +146,6 @@ const ReservationList = () => {
           Siguiente
         </button>
       </div>
-
-      {modalOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
-          <div className="bg-white p-8 rounded-lg text-center space-y-2">
-            <h3 className="mb-6">Editar Reserva</h3>
-            <form onSubmit={handleUpdate}>
-              <div className="flex flex-row justify-between my-2">
-                <label>Nombre:</label>
-                <input
-                  className="w-[50%] bg-[#c8c8c8] rounded-lg text-center"
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="flex flex-row justify-between">
-                <label>Personas:</label>
-                <input
-                  className="w-[50%] bg-[#c8c8c8] rounded-lg text-center"
-                  type="number"
-                  value={people}
-                  onChange={(e) => setPeople(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="my-2">
-                <label>Fecha:</label>
-                <input
-                  type="date"
-                  value={date}
-                  onChange={(e) => setDate(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <label>Hora:</label>
-                <input
-                  type="time"
-                  value={time}
-                  onChange={(e) => setTime(e.target.value)}
-                  required
-                />
-              </div>
-              <div>
-                <label>Status:</label>
-                <select
-                  value={status}
-                  onChange={(e) =>
-                    setStatus(
-                      e.target.value as "Pending" | "Confirmed" | "Cancelled",
-                    )
-                  }
-                >
-                  <option value="Pending">Pending</option>
-                  <option value="Confirmed">Confirmed</option>
-                  <option value="Cancelled">Cancelled</option>
-                </select>
-              </div>
-
-              <div className="flex justify-center mt-4">
-                <button
-                  type="submit"
-                  className="bg-green-500 text-white p-2 rounded"
-                >
-                  Actualizar
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setModalOpen(false)}
-                  className="bg-black text-white p-2 rounded ml-4"
-                >
-                  Cancelar
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

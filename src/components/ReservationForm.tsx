@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { createReservation } from "../services/reservationServices";
 
 interface ReservationFormProps {
   cancel: () => void;
@@ -13,12 +14,12 @@ const ReservationForm = ({ cancel }: ReservationFormProps) => {
   const [status, setStatus] = useState("Pending");
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [success, setsuccess] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
-    const body = {
+    const reservation = {
       name,
       people: parseInt(people),
       date,
@@ -27,21 +28,11 @@ const ReservationForm = ({ cancel }: ReservationFormProps) => {
     };
 
     try {
-      const response = await fetch("/api/reservations/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-
-      if (!response.ok) {
-        throw new Error("Error al crear la reserva");
-      }
-
-      const reservation = await response.json();
-      setsuccess(true);
-      setSuccessMessage(`Reserva creada exitosamente: ${reservation.name}`);
+      const newReservation = await createReservation(reservation);
+      setSuccess(true);
+      setSuccessMessage(
+        `Reservation created successfully: ${newReservation.name}`,
+      );
       setError(null);
 
       setName("");
@@ -50,7 +41,7 @@ const ReservationForm = ({ cancel }: ReservationFormProps) => {
       setTime("");
       setStatus("Pending");
     } catch {
-      setError(error || "Error al crear la reserva");
+      setError("Error creating the reservation");
       setSuccessMessage(null);
     }
   };
@@ -59,10 +50,10 @@ const ReservationForm = ({ cancel }: ReservationFormProps) => {
     <div className=" bg-white w-[360px] z-30 relative p-6 rounded-lg text-center mt-[200px] ">
       {!success ? (
         <>
-          <h2 className="text-center mb-6  ">Crear Nueva Reserva</h2>
+          <h2 className="text-center mb-6  ">Crear una nueva reserva</h2>
           <form className="space-y-3" onSubmit={handleSubmit}>
             <div className="flex flex-row justify-between my-2 ">
-              <label>Nombre:</label>
+              <label>Name:</label>
               <input
                 className="w-[50%] bg-[#c8c8c8] rounded-lg text-center "
                 type="text"
@@ -72,7 +63,7 @@ const ReservationForm = ({ cancel }: ReservationFormProps) => {
               />
             </div>
             <div className="flex flex-row justify-between my-2 ">
-              <label>Personas:</label>
+              <label>People:</label>
               <input
                 className="w-[50%] bg-[#c8c8c8] rounded-lg text-center "
                 type="number"
@@ -82,7 +73,7 @@ const ReservationForm = ({ cancel }: ReservationFormProps) => {
               />
             </div>
             <div>
-              <label>Fecha:</label>
+              <label>Date:</label>
               <input
                 type="date"
                 value={date}
@@ -91,7 +82,7 @@ const ReservationForm = ({ cancel }: ReservationFormProps) => {
               />
             </div>
             <div>
-              <label>Hora:</label>
+              <label>Time:</label>
               <input
                 type="time"
                 value={time}
@@ -100,7 +91,7 @@ const ReservationForm = ({ cancel }: ReservationFormProps) => {
               />
             </div>
             <div className="mb-8">
-              <label>Estado:</label>
+              <label>Status:</label>
               <select
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
@@ -116,13 +107,13 @@ const ReservationForm = ({ cancel }: ReservationFormProps) => {
                 className="bg-green-500 text-white p-2 rounded-lg "
                 type="submit"
               >
-                Crear Reserva
+                Crear una reserva
               </button>
               <button
                 onClick={cancel}
                 className="bg-black text-white p-2 rounded-lg "
               >
-                Cancelar
+                Cancel
               </button>
             </div>
           </form>

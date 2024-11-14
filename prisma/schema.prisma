@@ -15,5 +15,4 @@ model Reservation {
   time      String
   status    String
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
 }
