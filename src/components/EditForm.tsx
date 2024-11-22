@@ -60,7 +60,7 @@ const EditForm = ({ cancel, reservation }: EditFormProps) => {
     }
   };
   return (
-    <div className="flex justify-center items-center">
+    <div className="flex justify-center items-center  z-40 relative">
       <div className="bg-white p-8 rounded-lg text-center space-y-2">
         <h3 className="mb-6">Edit Reservation {reservation?.id.slice(-5)}</h3>
         <form onSubmit={handleUpdate}>
@@ -84,7 +84,7 @@ const EditForm = ({ cancel, reservation }: EditFormProps) => {
               required
             />
           </div>
-          <div className="my-2">
+          <div className="my-2 flex justify-between ">
             <label>Date:</label>
             <input
               type="date"
@@ -93,7 +93,7 @@ const EditForm = ({ cancel, reservation }: EditFormProps) => {
               required
             />
           </div>
-          <div>
+          <div className="flex justify-between">
             <label>Time:</label>
             <input
               type="time"
@@ -102,7 +102,7 @@ const EditForm = ({ cancel, reservation }: EditFormProps) => {
               required
             />
           </div>
-          <div>
+          <div className="flex justify-between">
             <label>Status:</label>
             <select
               value={status}

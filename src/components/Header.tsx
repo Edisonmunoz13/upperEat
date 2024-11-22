@@ -22,7 +22,7 @@ const Header = () => {
             />
             <p className="text-softBlack text-sm font-light">
               Welcome,
-              <span className="text-red font-semibold">
+              <span className="text-green-600 font-semibold">
                 {" "}
                 {session.user?.name}
               </span>
