@@ -8,7 +8,7 @@ interface SelectorProps {
 
 const ModeSelector = ({ list, exploreRestaurants }: SelectorProps) => {
   return (
-    <div className=" z-30 mt-2 flex flex-col space-y-6">
+    <div className=" z-30 mt-3 flex flex-col space-y-6">
       <Image
         className="mb-8 ml-2  "
         src={"/upperEatLogo.png"}
@@ -31,7 +31,7 @@ const ModeSelector = ({ list, exploreRestaurants }: SelectorProps) => {
         Explore restaurants
       </button>
 
-      <h2 className="text-center font-bold text-black text-xl pt-8">
+      <h2 className="text-center font-bold text-black text-xl pt-4">
         Log in to
         <span className="text-green-600 font-extrabold"> UpperEat</span>
       </h2>
