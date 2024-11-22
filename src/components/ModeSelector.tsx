@@ -3,14 +3,14 @@ import { signIn } from "next-auth/react";
 
 interface SelectorProps {
   list: () => void;
-  create: () => void;
+  exploreRestaurants: () => void;
 }
 
-const ModeSelector = ({ create, list }: SelectorProps) => {
+const ModeSelector = ({ list, exploreRestaurants }: SelectorProps) => {
   return (
-    <div className=" z-30 flex flex-col space-y-6">
+    <div className=" z-30 mt-6 flex flex-col space-y-6">
       <Image
-        className="mb-8 ml-2"
+        className="mb-8 ml-2  "
         src={"/upperEatLogo.png"}
         width={300}
         height={200}
@@ -18,20 +18,21 @@ const ModeSelector = ({ create, list }: SelectorProps) => {
       />
 
       <button
-        onClick={create}
-        className="bg-red text-lg font-semibold text-white w-[320px] py-3 rounded-lg"
-      >
-        Crea una nueva reserva
-      </button>
-      <button
         onClick={list}
         className="bg-softBlack text-lg font-semibold text-white w-[320px] py-3 rounded-lg"
       >
-        Ver el listado de reservas
+        View reservation list
+      </button>
+
+      <button
+        onClick={exploreRestaurants}
+        className="bg-green-600 text-lg font-semibold text-white w-[320px] py-3 rounded-lg"
+      >
+        Explore restaurants
       </button>
 
       <h2 className="text-center font-bold text-black text-xl pt-8">
-        Inicia sesión en
+        Log in to
         <span className="text-red font-extrabold"> UpperEat</span>
       </h2>
 
@@ -47,7 +48,7 @@ const ModeSelector = ({ create, list }: SelectorProps) => {
             height={30}
             alt="main"
           />
-          <h3>Continua con Google</h3>
+          <h3>Continue with Google</h3>
         </>
       </button>
     </div>

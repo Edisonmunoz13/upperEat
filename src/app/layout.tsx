@@ -4,7 +4,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { SessionProvider } from "next-auth/react";
 import Header from "../components/Header";
-import Image from "next/image";
+import { RestaurantProvider } from "../context/RestaurantContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -36,23 +36,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SessionProvider>
-          <Header />
-          <div className="absolute inset-0 z-0">
-            <Image
-              className=" object-cover w-full opacity-30"
-              src="/upperBackground.jpg"
-              fill
-              style={{
-                objectFit: "cover",
-              }}
-              alt="Background Image"
-              loading="lazy"
-            />
+          <RestaurantProvider>
+            <Header />
 
-            <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
-          </div>
-
-          {children}
+            {children}
+          </RestaurantProvider>
         </SessionProvider>
       </body>
     </html>

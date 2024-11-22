@@ -3,6 +3,7 @@ import React from "react";
 import ModeSelector from "../../components/ModeSelector";
 import { useRouter } from "next/navigation";
 import Footer from "../../components/Footer";
+import Image from "next/image";
 
 const Page = () => {
   const router = useRouter();
@@ -12,10 +13,24 @@ const Page = () => {
         list={() => {
           router.push("/reservations");
         }}
-        create={() => {
-          router.push("/new-reservation");
+        exploreRestaurants={() => {
+          router.push("restaurant-search");
         }}
       />
+      <div className="absolute inset-0 z-0">
+        <Image
+          className=" object-cover w-full opacity-30"
+          src="/upperBackground.jpg"
+          fill
+          style={{
+            objectFit: "cover",
+          }}
+          alt="Background Image"
+          loading="lazy"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+      </div>
       <Footer />
     </div>
   );

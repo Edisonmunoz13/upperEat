@@ -54,7 +54,7 @@ const EditForm = ({ cancel, reservation }: EditFormProps) => {
         router.push("/reservations");
         setError(null);
       } catch {
-        setError("Error al actualizar la reserva");
+        setError("Error updating reservation");
         console.log(error);
       }
     }
@@ -62,10 +62,10 @@ const EditForm = ({ cancel, reservation }: EditFormProps) => {
   return (
     <div className="flex justify-center items-center">
       <div className="bg-white p-8 rounded-lg text-center space-y-2">
-        <h3 className="mb-6">Editar Reserva {reservation?.id.slice(-5)}</h3>
+        <h3 className="mb-6">Edit Reservation {reservation?.id.slice(-5)}</h3>
         <form onSubmit={handleUpdate}>
           <div className="flex flex-row justify-between my-2">
-            <label>Nombre:</label>
+            <label>Name:</label>
             <input
               className="w-[50%] bg-[#c8c8c8] rounded-lg text-center"
               type="text"
@@ -75,7 +75,7 @@ const EditForm = ({ cancel, reservation }: EditFormProps) => {
             />
           </div>
           <div className="flex flex-row justify-between">
-            <label>Personas:</label>
+            <label>People:</label>
             <input
               className="w-[50%] bg-[#c8c8c8] rounded-lg text-center"
               type="number"
@@ -85,7 +85,7 @@ const EditForm = ({ cancel, reservation }: EditFormProps) => {
             />
           </div>
           <div className="my-2">
-            <label>Fecha:</label>
+            <label>Date:</label>
             <input
               type="date"
               value={date ? date.toISOString().split("T")[0] : ""}
@@ -94,7 +94,7 @@ const EditForm = ({ cancel, reservation }: EditFormProps) => {
             />
           </div>
           <div>
-            <label>Hora:</label>
+            <label>Time:</label>
             <input
               type="time"
               value={time}
@@ -112,9 +112,9 @@ const EditForm = ({ cancel, reservation }: EditFormProps) => {
                 )
               }
             >
-              <option value="Pending">Pendiente</option>
-              <option value="Confirmed">Confirmada</option>
-              <option value="Cancelled">Cancelada</option>
+              <option value="Pending">Pending</option>
+              <option value="Confirmed">Confirmed</option>
+              <option value="Cancelled">Cancelled</option>
             </select>
           </div>
 
@@ -123,14 +123,14 @@ const EditForm = ({ cancel, reservation }: EditFormProps) => {
               type="submit"
               className="bg-green-500 text-white p-2 rounded"
             >
-              Actualizar
+              Update
             </button>
             <button
               type="button"
               onClick={cancel}
               className="bg-black text-white p-2 rounded ml-4"
             >
-              Cancelar
+              Cancel
             </button>
           </div>
         </form>

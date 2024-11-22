@@ -26,7 +26,7 @@ const ReservationList = () => {
       setReservations(data);
       setFilteredReservations(data);
     } catch {
-      setError("Error al cargar las reservas");
+      setError("Error loading reservations");
     }
   };
 
@@ -53,7 +53,7 @@ const ReservationList = () => {
         reservations.filter((reservation) => reservation.id !== id),
       );
     } catch {
-      setError("Error al eliminar la reserva");
+      setError("Error deleting reservation");
     }
   };
 
@@ -75,22 +75,22 @@ const ReservationList = () => {
   return (
     <div className="p-4 bg-white z-30 relative rounded-lg">
       <h2 className="text-center font-semibold text-xl mb-2">
-        Lista de Reservas
+        Reservation List
       </h2>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
       <div className="my-3 text-xs">
-        <label className="mr-2">Filtrar por estado:</label>
+        <label className="mr-2">Filter by status:</label>
         <select
           value={filterStatus}
           onChange={(e) => setFilterStatus(e.target.value)}
           className="border p-1 rounded"
         >
-          <option value="">Todos</option>
-          <option value="Pending">Pendiente</option>
-          <option value="Confirmed">Confirmada</option>
-          <option value="Cancelled">Cancelada</option>
+          <option value="">All</option>
+          <option value="Pending">Pending</option>
+          <option value="Confirmed">Confirmed</option>
+          <option value="Cancelled">Cancelled</option>
         </select>
       </div>
 
@@ -98,7 +98,7 @@ const ReservationList = () => {
         {currentReservations.map((reservation: Reservation, index: number) => (
           <li
             key={reservation.id}
-            className={`flex justify-between items-center  ${
+            className={`flex justify-between  p-4 border border-[#cfcfcf] my-1 rounded-lg shadow-2xl   items-center  ${
               index !== currentReservations.length - 1
                 ? "border-b border-[#c8c8c8]"
                 : ""
@@ -106,7 +106,7 @@ const ReservationList = () => {
           >
             <div className="flex flex-row items-center w-full text-sm">
               <h3 className="w-[30%]">{reservation.name}</h3>
-              <h3 className="w-[35%]">Personas: {reservation.people}</h3>
+              <h3 className="w-[35%]">People: {reservation.people}</h3>
               <h3 className="w-[25%]">Status: {reservation.status}</h3>
             </div>
             <div className="space-y-1 flex flex-col">
@@ -133,17 +133,17 @@ const ReservationList = () => {
           disabled={currentPage === 1}
           className="px-4 py-2 bg-blue-500 text-white rounded-l"
         >
-          Anterior
+          Previous
         </button>
         <span className="px-4 py-2">
-          Página {currentPage} de {totalPages}
+          Page {currentPage} of {totalPages}
         </span>
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
           className="px-4 py-2 bg-blue-500 text-white rounded-r"
         >
-          Siguiente
+          Next
         </button>
       </div>
     </div>
