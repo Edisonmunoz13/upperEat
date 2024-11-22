@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { createReservation } from "../services/reservationServices";
 import { useRestaurantContext } from "../context/RestaurantContext";
 import { Table } from "@prisma/client";
-import { useSession } from "next-auth/react";
 
 interface ReservationFormProps {
   cancel: () => void;
