@@ -26,14 +26,12 @@ const Page = () => {
   const { data: session } = useSession();
   const [user, setuser] = useState<User | null>(null);
 
-  console.log("Session:", session);
-
   useEffect(() => {
     if (session?.user?.email) {
       const loadUser = async () => {
         try {
           const userData = await fetchUser(session?.user?.email);
-          console.log("User data fetched:", userData);
+
           if (userData) {
             setuser(userData);
             setUserId(userData.id);
