@@ -20,7 +20,7 @@ const ReservationForm = ({ cancel }: ReservationFormProps) => {
   const [error, setError] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
-  const { restaurantIdToMakeReservation } = useRestaurantContext();
+  const { restaurantIdToMakeReservation, userId } = useRestaurantContext();
 
   const defaultUserId = "a27ae60f-f739-4356-b346-90b8dd2eca74";
 
@@ -55,7 +55,7 @@ const ReservationForm = ({ cancel }: ReservationFormProps) => {
       date,
       time,
       status,
-      userId: defaultUserId,
+      userId: userId ? userId : defaultUserId,
       restaurantId: restaurantIdToMakeReservation,
       tableId,
     };

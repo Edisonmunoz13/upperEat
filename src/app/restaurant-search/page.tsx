@@ -20,7 +20,8 @@ const Page = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
   const [loadingCreate, setLoadingCreate] = useState(false);
-  const { setRestaurantIdToMakeReservation } = useRestaurantContext();
+  const { setRestaurantIdToMakeReservation, setUserId } =
+    useRestaurantContext();
   const router = useRouter();
   const { data: session } = useSession();
   const [user, setuser] = useState<User | null>(null);
@@ -28,19 +29,22 @@ const Page = () => {
   useEffect(() => {
     if (session?.user?.email) {
       const loadUser = async () => {
-        setLoading(true);
-        const userData = await fetchUser(session?.user?.email);
-        if (userData) {
-          setuser(userData);
+        try {
+          const userData = await fetchUser(session?.user?.email);
+
+          if (userData) {
+            setuser(userData);
+            setUserId(userData.id);
+          }
+        } catch (error) {
+          console.error("Error fetching user:", error);
         }
-        setLoading(false);
       };
 
       loadUser();
     } else {
-      setLoading(false);
     }
-  }, [session]);
+  }, [session, restaurants]);
 
   useEffect(() => {
     const loadRestaurants = async () => {
