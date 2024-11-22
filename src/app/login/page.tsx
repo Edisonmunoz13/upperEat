@@ -8,7 +8,7 @@ import Image from "next/image";
 const Page = () => {
   const router = useRouter();
   return (
-    <div className="mt-[110px] flex items-center justify-center ">
+    <div className="mt-[80px] flex items-center justify-center ">
       <ModeSelector
         list={() => {
           router.push("/reservations");
