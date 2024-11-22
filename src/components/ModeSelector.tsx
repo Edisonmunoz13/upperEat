@@ -8,7 +8,7 @@ interface SelectorProps {
 
 const ModeSelector = ({ list, exploreRestaurants }: SelectorProps) => {
   return (
-    <div className=" z-30 mt-6 flex flex-col space-y-6">
+    <div className=" z-30 mt-2 flex flex-col space-y-6">
       <Image
         className="mb-8 ml-2  "
         src={"/upperEatLogo.png"}
