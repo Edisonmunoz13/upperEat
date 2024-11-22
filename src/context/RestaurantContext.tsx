@@ -5,6 +5,8 @@ import React, { createContext, useContext, useState, ReactNode } from "react";
 interface RestaurantContextType {
   restaurantIdToMakeReservation: string | null;
   setRestaurantIdToMakeReservation: (id: string | null) => void;
+  userId: string | null;
+  setUserId: (id: string | null) => void;
 }
 
 const RestaurantContext = createContext<RestaurantContextType | undefined>(
@@ -15,11 +17,15 @@ export const RestaurantProvider = ({ children }: { children: ReactNode }) => {
   const [restaurantIdToMakeReservation, setRestaurantIdToMakeReservation] =
     useState<string | null>(null);
 
+  const [userId, setUserId] = useState<string | null>(null);
+
   return (
     <RestaurantContext.Provider
       value={{
         restaurantIdToMakeReservation,
         setRestaurantIdToMakeReservation,
+        userId,
+        setUserId,
       }}
     >
       {children}
