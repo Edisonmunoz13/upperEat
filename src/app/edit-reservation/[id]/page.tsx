@@ -4,6 +4,7 @@ import EditForm from "../../../components/EditForm";
 import { useParams } from "next/navigation";
 import { Reservation } from "../../../interfaces/reservation.interface";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 const Page = () => {
   const router = useRouter();
@@ -39,7 +40,21 @@ const Page = () => {
   }, [id]);
 
   return (
-    <div className="mt-[200px] relative z-50">
+    <div className="mt-[200px]">
+      <div className="absolute inset-0 z-0">
+        <Image
+          className=" object-cover w-full opacity-30"
+          src="/upperBackground.jpg"
+          fill
+          style={{
+            objectFit: "cover",
+          }}
+          alt="Background Image"
+          loading="lazy"
+        />
+
+        <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent"></div>
+      </div>
       <EditForm reservation={reservationToEdit} cancel={handleCancel} />
     </div>
   );

@@ -33,7 +33,7 @@ const ModeSelector = ({ list, exploreRestaurants }: SelectorProps) => {
 
       <h2 className="text-center font-bold text-black text-xl pt-8">
         Log in to
-        <span className="text-red font-extrabold"> UpperEat</span>
+        <span className="text-green-600 font-extrabold"> UpperEat</span>
       </h2>
 
       <button
